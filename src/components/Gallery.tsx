@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api, type MediaItem } from '../services/api';
 
 function Gallery() {
