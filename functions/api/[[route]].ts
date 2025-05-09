@@ -1,7 +1,16 @@
-import { PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
-import { s3Client } from '../../backend/src/lib/s3';
-import { supabase } from '../../backend/src/lib/supabase';
-import type { Media } from '../../backend/src/types/supabase';
+import { PutObjectCommand, DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { createClient } from '@supabase/supabase-js';
+
+// 定义 Media 类型
+interface Media {
+  id: string;
+  created_at: string;
+  filename: string;
+  originalname: string;
+  type: 'image' | 'video';
+  url: string;
+  uploaded_by: string;
+}
 
 export interface Env {
   AWS_ACCESS_KEY_ID: string;
@@ -12,6 +21,21 @@ export interface Env {
   SUPABASE_ANON_KEY: string;
   ADMIN_USER_ID: string;
 }
+
+// 创建 S3 客户端
+const s3Client = new S3Client({
+  region: process.env.AWS_REGION || 'ap-northeast-1',
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+  },
+});
+
+// 创建 Supabase 客户端
+const supabase = createClient(
+  process.env.SUPABASE_URL || '',
+  process.env.SUPABASE_ANON_KEY || ''
+);
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
