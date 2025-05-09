@@ -54,7 +54,7 @@ function AdminPanel() {
       }
 
       await api.deleteMedia(id, userId);
-      setMediaItems((prevItems: MediaItem[]) => prevItems.filter((item: MediaItem) => item.id !== id));
+      setMediaItems(prev => prev.filter(item => item.id !== id));
       setMessage('文件删除成功！');
     } catch (error) {
       console.error('Error deleting file:', error);
