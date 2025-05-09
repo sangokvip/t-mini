@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
-import WebApp from '@twa-dev/sdk';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Gallery from './components/Gallery';
 import AdminPanel from './components/AdminPanel';
+import Gallery from './components/Gallery';
 
 // 声明全局 Telegram 类型
 declare global {
@@ -15,11 +14,9 @@ declare global {
 
 function App() {
   useEffect(() => {
-    // 检查是否在 Telegram Web App 环境中
-    if (window.Telegram?.WebApp) {
-      WebApp.ready();
-      WebApp.expand();
-    }
+    // 初始化 Telegram WebApp
+    window.Telegram?.WebApp?.ready();
+    window.Telegram?.WebApp?.expand();
   }, []);
 
   return (

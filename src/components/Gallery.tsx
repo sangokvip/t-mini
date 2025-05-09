@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { api, type MediaItem } from '../services/api';
 
 function Gallery() {
-  const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [mediaItems, setMediaItems] = React.useState<MediaItem[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchMediaItems();
   }, []);
 

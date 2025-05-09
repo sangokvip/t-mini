@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { api, type MediaItem } from '../services/api';
 
 function AdminPanel() {
@@ -24,7 +24,7 @@ function AdminPanel() {
     }
   }, []);
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
@@ -54,7 +54,7 @@ function AdminPanel() {
       }
 
       await api.deleteMedia(id, userId);
-      setMediaItems(prev => prev.filter(item => item.id !== id));
+      setMediaItems((prev: MediaItem[]) => prev.filter((item: MediaItem) => item.id !== id));
       setMessage('文件删除成功！');
     } catch (error) {
       console.error('Error deleting file:', error);
