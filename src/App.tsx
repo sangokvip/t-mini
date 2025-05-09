@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import AdminPanel from './components/AdminPanel';
 import Gallery from './components/Gallery';
 
@@ -12,25 +12,48 @@ declare global {
   }
 }
 
+function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+  
+  return (
+    <Link
+      to={to}
+      className={`px-4 py-2 rounded-lg transition-colors ${
+        isActive
+          ? 'bg-blue-600 text-white'
+          : 'text-blue-600 hover:bg-blue-50'
+      }`}
+    >
+      {children}
+    </Link>
+  );
+}
+
 function App() {
   useEffect(() => {
     // 初始化 Telegram WebApp
-    window.Telegram?.WebApp?.ready();
-    window.Telegram?.WebApp?.expand();
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
+    }
   }, []);
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
-        <nav className="bg-white shadow-sm p-4">
-          <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-xl font-bold">Telegram 媒体库</h1>
-            <div className="space-x-4">
-              <a href="/" className="text-blue-600 hover:text-blue-800">首页</a>
-              <a href="/admin" className="text-blue-600 hover:text-blue-800">管理面板</a>
+      <div className="min-h-screen bg-gray-50">
+        <nav className="bg-white shadow-sm">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex justify-between items-center">
+              <h1 className="text-xl font-bold text-gray-800">Telegram 媒体库</h1>
+              <div className="space-x-2">
+                <NavLink to="/">首页</NavLink>
+                <NavLink to="/admin">管理面板</NavLink>
+              </div>
             </div>
           </div>
         </nav>
+        
         <main className="container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<Gallery />} />
