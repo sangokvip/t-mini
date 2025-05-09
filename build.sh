@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# 安装依赖
-npm install
+# 设置环境变量
+export NODE_ENV=production
 
-# 直接运行 vite build，跳过类型检查
-npm run build 
+# 安装依赖
+npm install --legacy-peer-deps
+
+# 运行构建
+./node_modules/.bin/vite build 
