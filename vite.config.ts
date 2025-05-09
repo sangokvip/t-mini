@@ -11,10 +11,14 @@ export default defineConfig({
     target: 'esnext',
     outDir: 'dist',
     sourcemap: true,
+    rollupOptions: {
+      external: ['dotenv', '../backend/**']
+    }
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
-    force: true
+    force: true,
+    exclude: ['dotenv']
   },
   esbuild: {
     jsxFactory: 'React.createElement',
