@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=18.17.0"
   },
   "scripts": {
     "dev": "vite",
@@ -19,7 +19,7 @@
     "@types/react-dom": "^18.2.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.5.1",
+    "react-router-dom": "^6.22.1",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
