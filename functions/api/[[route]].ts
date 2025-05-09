@@ -22,25 +22,25 @@ export interface Env {
   ADMIN_USER_ID: string;
 }
 
-// 创建 S3 客户端
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION || 'ap-northeast-1',
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
-  },
-});
-
-// 创建 Supabase 客户端
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_ANON_KEY || ''
-);
-
 export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
   const url = new URL(request.url);
   const path = url.pathname.replace('/api/', '');
+
+  // 创建 S3 客户端
+  const s3Client = new S3Client({
+    region: env.AWS_REGION,
+    credentials: {
+      accessKeyId: env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+    },
+  });
+
+  // 创建 Supabase 客户端
+  const supabase = createClient(
+    env.SUPABASE_URL,
+    env.SUPABASE_ANON_KEY
+  );
 
   // CORS 处理
   if (request.method === 'OPTIONS') {
