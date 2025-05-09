@@ -1,0 +1,33 @@
+name = "t-mini-api"
+main = "src/server.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+# 这里的环境变量会在开发环境中使用
+ADMIN_USER_ID = "bryansuperb"
+
+# 生产环境
+[env.production]
+name = "t-mini-api-prod"
+# 生产环境的变量需要在 Cloudflare Dashboard 中设置：
+# - AWS_ACCESS_KEY_ID
+# - AWS_SECRET_ACCESS_KEY
+# - AWS_REGION
+# - AWS_BUCKET_NAME
+# - SUPABASE_URL
+# - SUPABASE_ANON_KEY
+# - ADMIN_USER_ID
+
+# 测试环境
+[env.staging]
+name = "t-mini-api-staging"
+
+# 绑定你的 KV 命名空间
+# [[kv_namespaces]]
+# binding = "MY_KV"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 绑定你的 R2 存储桶
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket" 
