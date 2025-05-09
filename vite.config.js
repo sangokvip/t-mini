@@ -1,7 +1,7 @@
+import react from '@vitejs/plugin-react'
+
 export default {
-  plugins: [
-    require('@vitejs/plugin-react')()
-  ],
+  plugins: [react()],
   build: {
     outDir: 'dist'
   }
