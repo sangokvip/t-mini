@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import WebApp from '@twa-dev/sdk';
-import { api, MediaItem } from '../services/api';
+import React, { useEffect, useState } from 'react';
+import { api, type MediaItem } from '../services/api';
 
 function Gallery() {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
@@ -57,7 +56,7 @@ function Gallery() {
                 <video
                   src={item.url}
                   controls
-                  className="w-full h-full object-cover rounded-lg"
+                  className="max-w-full h-auto"
                   referrerPolicy="origin"
                 />
               )}
